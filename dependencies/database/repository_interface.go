@@ -1,7 +1,7 @@
 package database
 
 import (
-	"go_project/types"
+	"go-chat/types"
 	"time"
 )
 

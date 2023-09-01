@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go_project/app"
-	"go_project/dependencies/database/postgres"
+	"go-chat/app"
+	"go-chat/dependencies/database/postgres"
 )
 
 func main() {

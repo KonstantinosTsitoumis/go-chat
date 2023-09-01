@@ -2,8 +2,8 @@ package app
 
 import (
 	"fmt"
-	"go_project/dependencies/database"
-	"time"
+	"go-chat/app/tools"
+	"go-chat/dependencies/database"
 )
 
 type ChatDependancies struct {
@@ -12,16 +12,14 @@ type ChatDependancies struct {
 
 func StartChat(deps ChatDependancies) {
 
-	//deps.Repo.SendMessage("Test", "hello")
-	getMTime := time.Date(2023, time.September, 01, 7, 57, 0, 0, time.UTC)
+	go tools.ReadWorker(deps.Repo)
 
-	fmt.Println(getMTime)
+	username := "Anon"
+	for true {
+		var text string
 
-	messages := deps.Repo.GetMessages(getMTime)
+		_, _ = fmt.Scanln(&text)
 
-	//fmt.Printf("test")
-
-	for _, m := range messages {
-		fmt.Println(m.CreatedAt, "  ", m.Id, "  ", m.UserName+": "+m.Text)
+		deps.Repo.SendMessage(username, text)
 	}
 }

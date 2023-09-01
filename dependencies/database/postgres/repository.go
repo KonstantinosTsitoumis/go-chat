@@ -2,9 +2,9 @@ package postgres
 
 import (
 	"fmt"
-	"go_project/config"
-	"go_project/dependencies/database/postgres/models"
-	"go_project/types"
+	"go-chat/config"
+	"go-chat/dependencies/database/postgres/models"
+	"go-chat/types"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"time"
