@@ -11,7 +11,7 @@ import (
 )
 
 type Repository struct {
-	connection *gorm.DB
+	db *gorm.DB
 }
 
 func (r Repository) SendMessage(username string, text string) types.Message {
@@ -21,7 +21,7 @@ func (r Repository) SendMessage(username string, text string) types.Message {
 		CreatedAt: time.Now(),
 	}
 
-	r.connection.Create(&message)
+	r.db.Create(&message)
 
 	return types.Message{
 		Id:        message.Id,
@@ -31,10 +31,10 @@ func (r Repository) SendMessage(username string, text string) types.Message {
 	}
 }
 
-func (r Repository) GetMessages() []types.Message {
+func (r Repository) GetMessages(fromDate time.Time) []types.Message {
 	var messages []models.Message
 
-	r.connection.Find(&messages)
+	r.db.Where("created_at > ?", fromDate).Find(&messages)
 
 	var result []types.Message
 
@@ -69,5 +69,5 @@ func NewRepository() *Repository {
 
 	fmt.Println("Connected and migrated")
 
-	return &Repository{connection: db}
+	return &Repository{db: db}
 }

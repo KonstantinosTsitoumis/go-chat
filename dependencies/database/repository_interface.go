@@ -1,8 +1,11 @@
 package database
 
-import "go_project/types"
+import (
+	"go_project/types"
+	"time"
+)
 
 type IRepository interface {
-	GetMessages() []types.Message
+	GetMessages(fromDate time.Time) []types.Message
 	SendMessage(username string, text string) types.Message
 }
