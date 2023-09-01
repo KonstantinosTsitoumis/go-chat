@@ -15,7 +15,7 @@ func ReadWorker(Repo database.IRepository) {
 		messages := Repo.GetMessages(readFromDate)
 
 		for _, m := range messages {
-			fmt.Println(m.CreatedAt, "  ", m.Id, "  ", m.UserName+": "+m.Text)
+			fmt.Println(m.CreatedAt, m.UserName+": "+m.Text)
 		}
 
 		if len(messages) != 0 {

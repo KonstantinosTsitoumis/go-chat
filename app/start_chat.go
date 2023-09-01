@@ -1,9 +1,12 @@
 package app
 
 import (
+	"bufio"
 	"fmt"
+	"github.com/google/uuid"
 	"go-chat/app/tools"
 	"go-chat/dependencies/database"
+	"os"
 )
 
 type ChatDependancies struct {
@@ -14,11 +17,18 @@ func StartChat(deps ChatDependancies) {
 
 	go tools.ReadWorker(deps.Repo)
 
-	username := "Anon"
-	for true {
-		var text string
+	username := "Anon" + uuid.New().String()[0:5]
 
-		_, _ = fmt.Scanln(&text)
+	for true {
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+
+		text := scanner.Text()
+
+		if text == "post-trade is the real deal" {
+			fmt.Println("Quiting chat...")
+			break
+		}
 
 		deps.Repo.SendMessage(username, text)
 	}
