@@ -7,5 +7,6 @@ import (
 
 func main() {
 	repo := postgres.NewRepository()
-	app.StartChat(app.ChatDependancies{Repo: repo})
+
+	app.StartChat(app.ChatDependencies{Repo: repo})
 }

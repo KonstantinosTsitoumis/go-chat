@@ -1,4 +1,4 @@
-package tools
+package app
 
 import (
 	"fmt"
@@ -19,7 +19,9 @@ func ReadWorker(Repo database.IRepository) {
 		}
 
 		if len(messages) != 0 {
-			readFromDate = messages[len(messages)-1].CreatedAt
+			readFromDate = GetLastSliceElement(messages).CreatedAt
 		}
+
+		time.Sleep(2 * time.Millisecond)
 	}
 }
