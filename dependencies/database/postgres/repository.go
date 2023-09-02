@@ -14,7 +14,7 @@ type Repository struct {
 	db *gorm.DB
 }
 
-func (r Repository) SendMessage(username string, text string) types.Message {
+func (r Repository) SendMessage(username string, text string) {
 	message := models.Message{
 		Text:      text,
 		UserName:  username,
@@ -22,16 +22,9 @@ func (r Repository) SendMessage(username string, text string) types.Message {
 	}
 
 	r.db.Create(&message)
-
-	return types.Message{
-		Id:        message.Id,
-		UserName:  message.UserName,
-		Text:      message.Text,
-		CreatedAt: message.CreatedAt,
-	}
 }
 
-func (r Repository) GetMessages(fromDate time.Time) []types.Message {
+func (r Repository) GetMessages(fromDate time.Time) *[]types.Message {
 	var messages []models.Message
 
 	r.db.Where("created_at > ?", fromDate).Find(&messages)
@@ -51,7 +44,7 @@ func (r Repository) GetMessages(fromDate time.Time) []types.Message {
 		result = append(result, modelToType)
 	}
 
-	return result
+	return &result
 }
 
 func NewRepository() *Repository {

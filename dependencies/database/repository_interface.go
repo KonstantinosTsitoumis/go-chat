@@ -6,6 +6,6 @@ import (
 )
 
 type IRepository interface {
-	GetMessages(fromDate time.Time) []types.Message
-	SendMessage(username string, text string) types.Message
+	GetMessages(fromDate time.Time) *[]types.Message
+	SendMessage(username string, text string)
 }

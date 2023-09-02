@@ -12,7 +12,7 @@ func ReadWorker(Repo database.IRepository) {
 	readFromDate := time.Now()
 
 	for true {
-		messages := Repo.GetMessages(readFromDate)
+		messages := *Repo.GetMessages(readFromDate)
 
 		for _, m := range messages {
 			fmt.Println(m.CreatedAt, m.UserName+": "+m.Text)
